@@ -1,0 +1,264 @@
+:root {
+  --bg-1: #f3efe7;
+  --bg-2: #e4dbca;
+  --card: #fffaf1;
+  --ink: #222f3a;
+  --muted: #5d6974;
+  --accent: #0f7a70;
+  --accent-2: #0b5b8a;
+  --ok: #2a7f37;
+  --warn: #b1662f;
+  --danger: #9f3434;
+  --line: #d8cfbf;
+  --shadow: 0 8px 24px rgba(27, 35, 43, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Trebuchet MS", "Lucida Sans", "Gill Sans", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%, rgba(15, 122, 112, 0.13), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(11, 91, 138, 0.13), transparent 38%),
+    linear-gradient(155deg, var(--bg-1), var(--bg-2));
+}
+
+.shell {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: enter 280ms ease-out forwards;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+
+h1,
+h2 {
+  font-family: "Palatino Linotype", "Book Antiqua", serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+h2 {
+  margin: 10px 0 8px;
+  font-size: 1rem;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+input,
+select,
+button,
+.download {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font: inherit;
+}
+
+input,
+select {
+  padding: 9px;
+  background: #fff;
+  color: var(--ink);
+}
+
+button,
+.download {
+  margin-top: 8px;
+  padding: 9px 10px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: filter 100ms ease;
+}
+
+button:hover,
+.download:hover {
+  filter: brightness(1.03);
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.primary {
+  border: 0;
+  color: #f5fbfb;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+
+.ghost {
+  background: #f8f1e5;
+  color: var(--ink);
+}
+
+.dropZone {
+  margin-top: 8px;
+  border: 2px dashed #bcae91;
+  border-radius: 12px;
+  background: #f8f2e5;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.dropZone:hover,
+.dropZone:focus {
+  outline: none;
+  border-color: var(--accent-2);
+}
+
+.dropZone.dragover {
+  border-color: var(--accent);
+  background: #eaf4f2;
+}
+
+.dropZone[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dropTitle {
+  margin: 0;
+  font-weight: 700;
+}
+
+.dropHint {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.scaleRow {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.queueSummary {
+  margin: 10px 0 2px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.status {
+  margin: 10px 0 0;
+  min-height: 36px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f5efe2;
+  border: 1px solid #ddd0b8;
+  color: #45505c;
+}
+
+.status.info {
+  border-color: #cfcbbe;
+  background: #f4f2eb;
+}
+
+.status.ok {
+  border-color: #9ac8a1;
+  background: #edf8ef;
+  color: var(--ok);
+}
+
+.status.warn {
+  border-color: #d8b08f;
+  background: #fbf2ea;
+  color: var(--warn);
+}
+
+.status.error {
+  border-color: #e1a2a2;
+  background: #fbeeee;
+  color: var(--danger);
+}
+
+.download {
+  display: inline-block;
+  text-decoration: none;
+  color: #1a5f57;
+  background: #eff8f1;
+}
+
+.hidden {
+  display: none;
+}
+
+.output img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px dashed #c7b89a;
+  background: #ebe4d3;
+}
+
+.resultLinks {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.resultLink {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid #b7ccb8;
+  border-radius: 10px;
+  padding: 8px;
+  background: #edf7ef;
+  color: #205b2a;
+  font-weight: 700;
+}
+
+.emptyState {
+  margin: 0;
+  border: 1px dashed #cbbca0;
+  border-radius: 10px;
+  padding: 10px;
+  color: #6b6558;
+  background: #f8f2e4;
+  font-size: 0.85rem;
+}
+
+@keyframes enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

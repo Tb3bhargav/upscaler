@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IBP + DCCI Upscaler</title>
+    <link rel="stylesheet" href="sidebar.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero card">
+        <h1>IBP + DCCI Upscaler</h1>
+        <p class="subtitle">Local processing, no AI model, 3-pass IBP correction.</p>
+      </header>
+
+      <section class="card controls">
+        <h2>Bridge</h2>
+        <label for="backendUrl">Local bridge URL</label>
+        <input id="backendUrl" type="text" value="http://127.0.0.1:8765" />
+        <button id="checkConnection" class="ghost" type="button">Check bridge</button>
+
+        <h2>Images</h2>
+        <label for="imageInput">Images (PNG, JPG, WEBP, BMP, TIFF)</label>
+        <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff" multiple />
+        <div id="dropZone" class="dropZone" tabindex="0" role="button" aria-label="Drop images here or click to select files">
+          <p class="dropTitle">Drop files here</p>
+          <p class="dropHint">or click to select multiple files</p>
+        </div>
+        <div class="scaleRow">
+          <div>
+            <label for="scale">Scale</label>
+            <select id="scale">
+              <option value="2">2x</option>
+              <option value="3">3x</option>
+              <option value="4">4x</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="queueSummary" class="queueSummary">Queue: 0 item(s)</p>
+
+        <button id="runUpscale" class="primary" type="button">Process Queue</button>
+        <button id="clearQueue" class="ghost" type="button">Clear Queue</button>
+
+        <p id="statusText" class="status" role="status">Ready.</p>
+      </section>
+
+      <section class="card output">
+        <h2>Latest Output</h2>
+        <img id="upscaledPreview" alt="Upscaled output preview" style="display:none" />
+        <a id="downloadResult" class="download hidden" href="#">Download Latest PNG</a>
+
+        <h2>Batch Downloads</h2>
+        <div id="resultLinks" class="resultLinks"></div>
+      </section>
+    </main>
+
+    <script type="module" src="sidebar.js"></script>
+  </body>
+  </html>

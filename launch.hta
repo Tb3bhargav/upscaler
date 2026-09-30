@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>upscaler - Launcher</title>
+<HTA:APPLICATION
+  ID="UpscalerLauncher"
+  APPLICATIONNAME="upscaler Launcher"
+  SINGLEINSTANCE="yes"
+  WINDOWSTATE="normal"
+  SCROLL="no"
+  CONTEXTMENU="no"
+/>
+<style>
+body{font-family:"Segoe UI",Arial,sans-serif;background:#0e152b;color:#d8e2ff;margin:0;padding:24px;}
+.card{background:#111c35;border:1px solid #7e93ff;border-radius:12px;padding:20px;max-width:560px;margin:0 auto;}
+h1{margin:0 0 6px;font-size:20px;color:#fff;}
+.sub{color:#8ea1d8;font-size:12px;margin-bottom:16px;}
+button{display:block;width:100%;margin:8px 0;padding:12px;font-size:14px;font-weight:700;border-radius:8px;border:1px solid #7e93ff;cursor:pointer;}
+.primary{background:#7e93ff;color:#081021;}
+.ghost{background:transparent;color:#d8e2ff;}
+.hint{font-size:12px;color:#8ea1d8;margin-top:12px;line-height:1.5;}
+code{background:#080e1f;padding:2px 6px;border-radius:4px;color:#98f3cc;}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>upscaler</h1>
+<div class="sub">Easy starter - double-click this file to begin. No terminal needed.</div>
+<button class="primary" onclick="VBScript:StartBridge">1 - Start Bridge Server</button>
+<button class="ghost" onclick="VBScript:OpenSidebar">2 - Open Sidebar Demo</button>
+<button class="ghost" onclick="VBScript:OpenFolder">3 - Open Project Folder</button>
+<div class="hint">Step 1 starts <code>bridge_server.py</code> on http://127.0.0.1:8765.<br>Step 2 opens the Chrome extension sidebar preview.<br>To install fully: load <code>chrome_extension</code> via chrome://extensions -&gt; Developer mode -&gt; Load unpacked.</div>
+</div>
+<script language="VBScript">
+Dim sh, fso
+Set sh = CreateObject("WScript.Shell")
+Set fso = CreateObject("Scripting.FileSystemObject")
+Function GetBase()
+  Dim p
+  p = Unescape(document.location.pathname)
+  If Left(p, 1) = "/" Then p = Mid(p, 2)
+  p = Replace(p, "/", "\")
+  GetBase = fso.GetParentFolderName(p)
+End Function
+Sub StartBridge()
+  Dim base, py, cmd
+  base = GetBase()
+  py = fso.BuildPath(base, ".venv\Scripts\python.exe")
+  If Not fso.FileExists(py) Then py = "python"
+  cmd = "cmd /k cd /d " & Chr(34) & base & Chr(34) & " && " & Chr(34) & py & Chr(34) & " bridge_server.py --host 127.0.0.1 --port 8765"
+  sh.Run cmd, 1, False
+End Sub
+Sub OpenSidebar()
+  Dim target
+  target = fso.BuildPath(GetBase(), "chrome_extension\sidebar.html")
+  sh.Run Chr(34) & target & Chr(34), 1, False
+End Sub
+Sub OpenFolder()
+  sh.Run Chr(34) & GetBase() & Chr(34), 1, False
+End Sub
+</script>
+</body>
+</html>
